@@ -1,9 +1,9 @@
 const connection = require("./db/db");
 const express = require("express");
 const cors = require("cors");
-const FlatRoute = require("./routes/FlatRoute");
+const TodoRoute = require("./routes/TodoRoute");
 const UserRoute = require("./routes/UserRoute");
-const Flat = require("./models/FlatSchema");
+const Flat = require("./models/TodoSchema");
 
 const app = express();
 app.use(express.urlencoded({extended:true}));
@@ -14,7 +14,7 @@ app.use(
     })
   );
   
-app.use("/flats",FlatRoute);
+app.use("/todo",TodoRoute);
 app.use("/user",UserRoute);
 
 app.get("/",(req,res)=>{

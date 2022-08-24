@@ -5,7 +5,7 @@ const crypto = require("node:crypto");
 const UserRoute = Router();
 
 
-//Manager signup
+//User signup
 UserRoute.post("/signup",(req,res)=>{
     const {name,email,password}=req.body;
     const hash = crypto.pbkdf2Sync(password,"SECRETSALT",60,64,"sha256").toString("hex");
@@ -16,12 +16,7 @@ UserRoute.post("/signup",(req,res)=>{
 })
 
 
-UserRoute.get("/singleuser/:id", async(req,res)=>{
-    const singleuser = await User.find({"_id":req.params.id});
-    res.send(singleuser);
-})
-
-//Manager login
+//User login
 UserRoute.post("/signin",async(req,res)=>{
     const {email , password} = req.body;
     const user = await User.findOne({email});
