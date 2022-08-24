@@ -15,6 +15,11 @@ UserRoute.post("/signup",(req,res)=>{
     });
 })
 
+//Getting single user
+UserRoute.get("/singleuser/:id", async(req,res)=>{
+    const singleuser = await User.find({"_id":req.params.id});
+    res.send(singleuser);
+})
 
 //User login
 UserRoute.post("/signin",async(req,res)=>{
