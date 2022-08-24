@@ -1,7 +1,7 @@
 const connection = require("./db/db");
 const express = require("express");
 const cors = require("cors");
-// const FlatRoute = require("./routes/FlatRoute");
+const FlatRoute = require("./routes/FlatRoute");
 // const UserRoute = require("./routes/UserRoute");
 const Flat = require("./models/FlatSchema");
 
@@ -14,14 +14,14 @@ app.use(
     })
   );
   
-// app.use("/flats",FlatRoute);
+app.use("/flats",FlatRoute);
 // app.use("/user",UserRoute);
 
 app.get("/",(req,res)=>{
     res.send("Mock10 working..")
 })
 
-app.get("/flats",async(req,res)=>{
+app.get("/allflats",async(req,res)=>{
     const flats = await Flat.find();
     res.send(flats);
 })
