@@ -1,8 +1,8 @@
 const connection = require("./db/db");
 const express = require("express");
 const cors = require("cors");
-const FlatRoute = require("./routes/FlatRoute");
-const UserRoute = require("./routes/UserRoute");
+// const FlatRoute = require("./routes/FlatRoute");
+// const UserRoute = require("./routes/UserRoute");
 
 const app = express();
 app.use(express.urlencoded({extended:true}));
@@ -13,8 +13,8 @@ app.use(
     })
   );
   
-app.use("/flats",FlatRoute);
-app.use("/user",UserRoute);
+// app.use("/flats",FlatRoute);
+// app.use("/user",UserRoute);
 
 app.get("/",(req,res)=>{
     res.send("Mock10 working..")
