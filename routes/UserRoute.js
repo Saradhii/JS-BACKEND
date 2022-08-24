@@ -16,10 +16,10 @@ UserRoute.post("/signup",(req,res)=>{
 })
 
 
-UserRoute.get("/all",async(req,res)=>{
-    const users = await User.find();
-    res.send(users);
-});
+UserRoute.get("/singleuser/:id", async(req,res)=>{
+    const singleuser = await User.find({"_id":req.params.id});
+    res.send(singleuser);
+})
 
 //Manager login
 UserRoute.post("/signin",async(req,res)=>{
