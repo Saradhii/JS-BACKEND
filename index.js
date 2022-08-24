@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 // const FlatRoute = require("./routes/FlatRoute");
 // const UserRoute = require("./routes/UserRoute");
+const Flat = require("./models/FlatSchema");
 
 const app = express();
 app.use(express.urlencoded({extended:true}));
@@ -18,6 +19,11 @@ app.use(
 
 app.get("/",(req,res)=>{
     res.send("Mock10 working..")
+})
+
+app.get("/flats",(req,res)=>{
+    const flats = await Flat.find();
+    res.send(flats);
 })
 
 const PORT = process.env.PORT || 8060
