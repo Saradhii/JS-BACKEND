@@ -19,6 +19,12 @@ TodoRoute.get("/all/:id", async(req,res)=>{
     res.status(200).send(todos);
 });
 
+TodoRoute.get("/allpending/:id", async(req,res)=>{
+    const todos = await Todo.find({$and: [{"id": req.params.id},
+    {"todoStatus": "Pending"}]});
+    res.status(200).send(todos);
+});
+
 //delete todo
 TodoRoute.delete("/delete/:id", async(req,res)=>{
     const data = await Todo.deleteOne({ _id: req.params.id });
