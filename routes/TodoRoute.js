@@ -4,23 +4,25 @@ const Router = require("express");
 
 const TodoRoute = Router();
 
+// add new todo
 TodoRoute.post("/newtodo",(req,res)=>{
     const {id,todoTask,todoStatus,todoTag}=req.body;
     const todo = new Todo({id,todoTask,todoStatus,todoTag});
     todo.save().then(()=>{
-        res.send({message:"Todo created successfully"});
+        res.status(200).send({message:"Todo created successfully"});
     });
 })
 
+// get all todos respective to userid
 TodoRoute.get("/all/:id", async(req,res)=>{
     const todos = await Todo.find({"id":req.params.id});
-    res.send(todos);
+    res.status(200).send(todos);
 });
 
-// FlatRoute.get("/singleflat/:id", async(req,res)=>{
-//     const singleflat = await Todo.find({"_id":req.params.id});
-//     res.send(singleflat);
-// })
+TodoRoute.delete("/delete/:id", async(req,res)=>{
+    const data = await Todo.deleteOne({ _id: req.params.id });
+    return res.status(200).send({ message: "todo Deleted Succsessfully" });
+})
 
 // FlatRoute.post("/byblock",async(req,res)=>{
 //     const block = await Todo.find(req.body);
