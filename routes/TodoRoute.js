@@ -19,14 +19,23 @@ TodoRoute.get("/all/:id", async(req,res)=>{
     res.status(200).send(todos);
 });
 
+//delete todo
 TodoRoute.delete("/delete/:id", async(req,res)=>{
     const data = await Todo.deleteOne({ _id: req.params.id });
     return res.status(200).send({ message: "todo Deleted Succsessfully" });
 })
 
-// FlatRoute.post("/byblock",async(req,res)=>{
-//     const block = await Todo.find(req.body);
-//     res.send(block);
-// })
+//get single todo by id
+TodoRoute.get("/singletodo/:id",async(req,res)=>{
+    const bestProduct = await Todo.find(req.params);
+    res.status(200).send(bestProduct);
+})
+
+//update todo by id 
+TodoRoute.patch("/edit/:_id",async (req,res) => {
+    const updated = await Todo.updateOne({"_id":req.params},{$set:{"todoTask":req.body.todoTask , "todoStatus":req.body.todoStatus, "todoTag":req.body.todoTag }});
+    res.status(200).send(updated);
+  }
+);
 
 module.exports=TodoRoute;
