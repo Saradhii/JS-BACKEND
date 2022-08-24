@@ -21,7 +21,7 @@ app.get("/",(req,res)=>{
     res.send("Mock10 working..")
 })
 
-app.get("/flats",(req,res)=>{
+app.get("/flats",async(req,res)=>{
     const flats = await Flat.find();
     res.send(flats);
 })
