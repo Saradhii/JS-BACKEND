@@ -15,6 +15,12 @@ UserRoute.post("/signup",(req,res)=>{
     });
 })
 
+
+UserRoute.get("/all",async(req,res)=>{
+    const users = await User.find();
+    res.send(users);
+});
+
 //Manager login
 UserRoute.post("/signin",async(req,res)=>{
     const {email , password} = req.body;
@@ -25,7 +31,7 @@ UserRoute.post("/signin",async(req,res)=>{
         return res.send({message:"invalid cresentials"});
     }
     const token = jwt.sign({name:user?.name},'SECRET1234',{expiresIn: "30min"},);
-    res.send({message: 'Logged in',token});
+    res.send({message: 'Logged in',token,user});
 });
 
 module.exports=UserRoute;
